@@ -6,6 +6,8 @@ import chalk from 'chalk';
 import dotenv from "dotenv";
 import mongoose from 'mongoose';
 
+//Routes Path
+import authRouters from "./routes/authRoutes"
 
 //Config
 dotenv.config()
@@ -31,6 +33,10 @@ mongoose.connect(process.env.MONGO_DB_URL)
 .catch((err) => {
     console.log(err)
 })
+
+
+//API routes
+app.use("/api/v1/auth", authRouters)
 
 //listen server
 app.listen(PORT, () => {
