@@ -5,9 +5,10 @@ import bodyParser from 'body-parser';
 import chalk from 'chalk';
 import dotenv from "dotenv";
 import mongoose from 'mongoose';
+import errorHandler from './middleware/errorMiddleware.js';
 
 //Routes Path
-import authRouters from "./routes/authRoutes"
+import authRouters from "./routes/authRoutes.js"
 
 //Config
 dotenv.config()
@@ -20,6 +21,7 @@ app.use(cors());
 app.use(express.json())
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(morgan('dev'));
+app.use(errorHandler)
 
 //port set-up
 const PORT = process.env.PORT || 6969;
