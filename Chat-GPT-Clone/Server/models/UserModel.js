@@ -15,7 +15,7 @@ const userSchema = mongoose.Schema({
   password: {
     type: String,
     required: [true, "Password is Required"],
-    minlength: [8, "Password length should be 8 character long"],
+    minlength: [6, "Password length should be 6 character"],
   },
   customerId: {
     type: String,
@@ -30,7 +30,7 @@ const userSchema = mongoose.Schema({
 //Hashed Password
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
-    next();
+    return next();
   }
   const slat = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, slat);
@@ -38,8 +38,15 @@ userSchema.pre("save", async function (next) {
 });
 
 //Match password
-userSchema.method.matchPassword = async function (password) {
+userSchema.methods.matchPassword = async function (password) {
   return await bcrypt.compare(password, this.password);
+};
+
+// Get JWT Token
+userSchema.methods.getJwtToken = function () {
+  return JWT.sign({ id: this._id }, process.env.JWT_ACCESS_SECRET, {
+    expiresIn: process.env.JWT_ACCESS_EXPIREN_IN,
+  });
 };
 
 //Sign Token

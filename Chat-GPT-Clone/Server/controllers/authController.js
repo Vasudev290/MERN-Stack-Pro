@@ -1,14 +1,6 @@
 import userModel from "../models/UserModel.js";
 import errorResponse from "../utils/errorResponse.js";
-
-//JWT Tokens
-const sendToken = (user, statusCode, res) => {
-  const token = user.getSignedToken(res);
-  res.status(statusCode).json({
-    success: true,
-    token,
-  });
-};
+import sendToken from "../utils/sendToken.js";
 
 //Register
 const registerController = async (req, res, next) => {
@@ -17,7 +9,7 @@ const registerController = async (req, res, next) => {
     //Existing User
     const existingEmail = await userModel.findOne({ email });
     if (existingEmail) {
-      return next(new errorResponse("Email is already register", 500));
+      return next(new errorResponse("Email is already register", 400));
     }
     const user = await userModel.create({ username, email, password });
     sendToken(user, 201, res);
@@ -31,14 +23,14 @@ const registerController = async (req, res, next) => {
 const loginController = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    if (!email || password) {
-      return next(new errorResponse("Please provide email or password"));
+    if (!email || !password) {
+      return next(new errorResponse("Please provide email or password", 400));
     }
     const user = await userModel.findOne({ email });
     if (!user) {
       return next(new errorResponse("Invalid Creditial", 401));
     }
-    const isMatch = await userModel.matchPassword(password);
+    const isMatch = await user.matchPassword(password);
     if (!isMatch) {
       return next(new errorResponse("Invalid Creditial", 401));
     }
@@ -52,11 +44,11 @@ const loginController = async (req, res, next) => {
 
 //Logout
 const logoutController = async (req, res) => {
-  res.clearCookie("refreshToken");
-  return res.status(200).json({
+  res.clearCookie("token");
+  res.status(200).json({
     success: true,
     message: "Logout Successful",
   });
 };
 
-export { registerController, loginController, logoutController, sendToken };
+export { registerController, loginController, logoutController };
