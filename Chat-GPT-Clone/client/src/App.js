@@ -3,6 +3,7 @@ import {Routes, Route} from "react-router-dom"
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material/styles"
 import { themeSettings } from "./theme.js"
+import { Toaster } from "react-hot-toast"
 import Navbar from './Components/Navbar'
 import Homepage from './pages/Homepage'
 import Register from './pages/Register'
@@ -14,6 +15,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline/>
     <Navbar/>
+    <Toaster/>
       <Routes>
         <Route path='/' element={<Homepage/>}/>
         <Route path='/register' element={<Register/>}/>
