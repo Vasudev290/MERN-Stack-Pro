@@ -39,11 +39,11 @@ const Homepage = () => {
             }}
           >
             <DescriptionRounded
-              sx={{ fontSize: 20, color: "primary.main", mt: 2, ml: 2 }}
+              sx={{ fontSize: 20, color: "success.main", mt: 2, ml: 2 }}
             />
             <Stack p={1} pt={0}>
               <Typography fontWeight="bold" variant="h6">
-                TEXT SUMAMRY
+                Text Summary
               </Typography>
               <Typography variant="h6">
                 Summarize long text into short sentences
@@ -71,7 +71,7 @@ const Homepage = () => {
             }}
           >
             <FormatAlignLeftOutlined
-              sx={{ fontSize: 20, color: "primary.main", mt: 2, ml: 2 }}
+              sx={{ fontSize: 20, color: "success.main", mt: 2, ml: 2 }}
             />
             <Stack p={1} pt={0}>
               <Typography fontWeight="bold" variant="h6">
@@ -109,7 +109,7 @@ const Homepage = () => {
               }}
             >
               <ChatRounded
-                sx={{ fontSize: 20, color: "primary.main", mt: 2, ml: 2 }}
+                sx={{ fontSize: 20, color: "success.main", mt: 2, ml: 2 }}
               />
               <Stack p={1} pt={0}>
                 <Typography fontWeight="bold" variant="h6">
@@ -141,7 +141,7 @@ const Homepage = () => {
             }}
           >
             <ChatRounded
-              sx={{ fontSize: 20, color: "primary.main", mt: 2, ml: 2 }}
+              sx={{ fontSize: 20, color: "success.main", mt: 2, ml: 2 }}
             />
             <Stack p={1} pt={0}>
               <Typography fontWeight="bold" variant="h6">
@@ -173,7 +173,7 @@ const Homepage = () => {
             }}
           >
             <ChatRounded
-              sx={{ fontSize: 20, color: "primary.main", mt: 2, ml: 2 }}
+              sx={{ fontSize: 20, color: "success.main", mt: 2, ml: 2 }}
             />
             <Stack p={1} pt={0}>
               <Typography fontWeight="bold" variant="h6">
